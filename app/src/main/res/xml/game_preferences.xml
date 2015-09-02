@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="@string/pref_number_of_countries_default"
+        android:dialogTitle="@string/pref_number_of_countries_label"
+        android:entries="@array/pref_number_of_countries_entries"
+        android:entryValues="@array/pref_number_of_countries_values"
+        android:key="pref_number_of_countries"
+        android:summary="%s"
+        android:title="@string/pref_number_of_countries_label" />
+</PreferenceScreen>

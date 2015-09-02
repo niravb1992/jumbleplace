@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">JumblePlace</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="country_guess_edittext_hint">Type your guess</string>
+    <string name="guess_button_text">Guess</string>
+    <string name="next_button_text">Next</string>
+
+    <string name="new_game_option_text">New Game</string>
+    <string name="view_scores_option_text">View Scores</string>
+
+    <string name="pref_number_of_countries">pref_number_of_countries</string>
+
+    <string name="pref_number_of_countries_label">Number of Countries Per Game</string>
+
+    <string name="pref_number_of_countries_default">10</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_scores">Scores</string>
+
+    <string name="finish_game_dialog_title">Game Over</string>
+    <string name="finish_game_error_dialog_title">Error</string>
+
+    <string name="finish_game_dialog_positive_button_text">Yes</string>
+    <string name="finish_game_error_dialog_positive_button_text">OK</string>
+    <string name="finish_game_dialog_no_button_text">No</string>
+
+    <string name="finish_game_dialog_message">
+        Your current score is %1$d/%2$d. Do you want to save it?
+    </string>
+    <string name="finish_game_dialog_error_message">
+        There was an internal error while saving the score for your current game. Click OK to start
+        a new game.
+    </string>
+
+</resources>
