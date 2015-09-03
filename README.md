@@ -13,4 +13,16 @@ Each game shows you some jumbled country names. You're supposed to guess the cou
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/ScoresActivity.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/SettingsActivity.png)
 
+# Internals
 
+## Backend
+When a user starts the app for the first time or changes his/her preference for "Number of Countries Per Game", the app does the following in the background:
+* Makes an HTTP GET request to a web service endpoint requesting 2*n country names, with n depending on the user's current preference for "Number of Countries Per Game". The endpoint returns a shuffled list of country names.
+* Empties the cache (a SQLite database table).
+* Caches n of those country names (Stores them in that SQLite database table) and uses the remaining n country names for the current game. 
+
+When the current game is over and a new game is started, the app does the following in the background:
+* Loads the existing n items from the cache.
+* Makes an HTTP GET request to the same web service endpoint, this time requesting n country names. When those n country names are returned, the cache is emptied and new country names are stored for the next game. 
+
+The caching mechanism enables a new game to start instantly after finishing the current one. This is because the data for a new game is loaded from the local SQLite database and the fetching of the data for the next game happens in the background, without the user knowing. 
