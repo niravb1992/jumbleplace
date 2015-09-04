@@ -47,6 +47,15 @@ public class ScoreModel {
                 scoreValues);
         return uri != null;
     }
+
+    public static void deleteAll(Context context) {
+
+        context.getContentResolver().delete(JPUriManager.BASE_URI.buildUpon()
+                .appendPath(JPUriManager.URI_PATH_SCORE).build(), null, null);
+
+
+    }
+
     //endregion
 
     //region Internals

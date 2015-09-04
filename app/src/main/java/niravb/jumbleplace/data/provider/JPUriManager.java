@@ -11,7 +11,7 @@ public class JPUriManager {
     public static final Uri BASE_URI = Uri.parse("content://" + JPContentProvider.AUTHORITY_NAME);
 
     public static final String URI_PATH_SCORES = ScoresTable.TABLE_NAME;
-    private static final String URI_PATH_SCORE = "score";
+    public static final String URI_PATH_SCORE = "score";
     public static final String URI_PATH_SCORE_WITH_ID = ScoresTable.TABLE_NAME + "/#";
     public static final String URI_PATH_CACHED_COUNTRIES = CachedCountriesTable.TABLE_NAME;
     public static final String URI_PATH_CACHED_COUNTRY = "cached_country";
