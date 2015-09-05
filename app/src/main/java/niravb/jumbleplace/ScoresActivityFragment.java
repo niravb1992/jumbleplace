@@ -1,16 +1,21 @@
 package niravb.jumbleplace;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import niravb.jumbleplace.data.models.ScoreModel;
 import niravb.jumbleplace.ui.Dialogs;
@@ -22,7 +27,8 @@ import niravb.jumbleplace.ui.ScoresListCursorAdapter;
 public class ScoresActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private ScoresListCursorAdapter cursorAdapter;
-    private final int SCORES_LOADER = 0;
+
+    private ListView scoresListView;
 
     public ScoresActivityFragment() {
     }
@@ -43,15 +49,46 @@ public class ScoresActivityFragment extends Fragment implements LoaderManager.Lo
 
         View rootView = inflater.inflate(R.layout.fragment_scores, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
-        listView.setAdapter(cursorAdapter);
+        scoresListView = (ListView) rootView.findViewById(R.id.listView);
+        scoresListView.setAdapter(cursorAdapter);
+
+        registerForContextMenu(scoresListView);
 
         return rootView;
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_score_item, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.action_share_score:
+                View v = scoresListView.getAdapter().getView(info.position, null, null);
+                TextView scoredOverTotalTextView = (TextView) v.findViewById(R.id.scored_over_total_textview);
+                Intent intent = Utilities.
+                        getScoreShareIntent(getContext(),
+                                scoredOverTotalTextView.getText().toString());
+                startActivity(Intent.createChooser(intent, "Share Score"));
+                return true;
+            default:
+                Cursor cursor = (Cursor) scoresListView.getAdapter().getItem(info.position);
+                ScoreModel.delete(getActivity(), cursor.getInt(Utilities.TABLE_ID_COLUMN_INDEX));
+                return super.onContextItemSelected(item);
+        }
+
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
+        int SCORES_LOADER = 0;
         getLoaderManager().initLoader(SCORES_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
@@ -64,8 +101,6 @@ public class ScoresActivityFragment extends Fragment implements LoaderManager.Lo
         switch (id) {
             case R.id.action_clear_scores:
 
-                final ScoresActivityFragment scoresActivityFragment = this;
-
                 Dialogs.showConfirmDialog(
                         getActivity(),
                         getString(R.string.clear_scores_dialog_title),
@@ -76,8 +111,6 @@ public class ScoresActivityFragment extends Fragment implements LoaderManager.Lo
                             public void onClick(DialogInterface dialog, int which) {
 
                                 ScoreModel.deleteAll(getActivity());
-                                getLoaderManager().restartLoader(SCORES_LOADER, null,
-                                        scoresActivityFragment);
 
                             }
                         },

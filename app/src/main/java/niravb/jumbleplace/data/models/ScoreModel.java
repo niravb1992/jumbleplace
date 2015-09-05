@@ -51,8 +51,21 @@ public class ScoreModel {
     public static void deleteAll(Context context) {
 
         context.getContentResolver().delete(JPUriManager.BASE_URI.buildUpon()
-                .appendPath(JPUriManager.URI_PATH_SCORE).build(), null, null);
+                .appendPath(JPUriManager.URI_PATH_SCORES).build(), null, null);
 
+
+    }
+
+    public static void delete(Context context, int id) {
+
+        context.getContentResolver().
+                delete(
+                        JPUriManager.
+                                BASE_URI.buildUpon().
+                                appendPath(JPUriManager.URI_PATH_SCORES).build(),
+                        ScoresTable._ID + "=?",
+                        new String[]{String.valueOf(id)}
+                );
 
     }
 

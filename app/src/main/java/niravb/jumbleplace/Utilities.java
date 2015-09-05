@@ -1,14 +1,18 @@
 package niravb.jumbleplace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.preference.PreferenceManager;
 
 import java.util.Random;
 
 public class Utilities {
 
+    public static final int TABLE_ID_COLUMN_INDEX = 0;
+
     /**
      * Fisher-Yates shuffle https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+     *
      * @param toShuffle The string to shuffle
      * @return The shuffled string
      */
@@ -34,6 +38,15 @@ public class Utilities {
                 getDefaultSharedPreferences(context).
                 getString(prefNumOfCountriesKey,
                         prefNumOfCountriesDefaultValue));
+    }
+
+    public static Intent getScoreShareIntent(Context context, String scoreText) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,
+                String.format(context.getString(R.string.score_share_text), scoreText));
+        sendIntent.setType("text/plain");
+        return sendIntent;
     }
 
 }

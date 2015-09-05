@@ -38,7 +38,7 @@ public class CachedCountryModel {
     public static void deleteAll(Context context) {
 
         context.getContentResolver().delete(JPUriManager.BASE_URI.buildUpon()
-                .appendPath(JPUriManager.URI_PATH_CACHED_COUNTRY).build(), null, null);
+                .appendPath(JPUriManager.URI_PATH_CACHED_COUNTRIES).build(), null, null);
 
 
     }

@@ -122,11 +122,18 @@ public class JPContentProvider extends ContentProvider {
 
         int rowsDeletedCount;
         switch (uriMatcher.match(uri)) {
-            case JPUriManager.URI_SCORE:
+            // case JPUriManager.URI_SCORE:
+            case JPUriManager.URI_SCORES:
                 rowsDeletedCount = jpSqlDatabaseHelper.getWritableDatabase().
                         delete(ScoresTable.TABLE_NAME, selection, selectionArgs);
+                if (rowsDeletedCount > 0)
+                    getContext().getContentResolver().notifyChange(uri, null);
                 break;
-            case JPUriManager.URI_CACHED_COUNTRY:
+            case JPUriManager.URI_CACHED_COUNTRIES:
+                // NOTE: We do not want to notify data change here because after we fetch the cached
+                // countries for the current game, those exact countries are deleted in the
+                // background, which causes a weird behavior, specifically, an infinite loop of
+                // data being created and deleted.
                 rowsDeletedCount = jpSqlDatabaseHelper.getWritableDatabase().
                         delete(CachedCountriesTable.TABLE_NAME, selection, selectionArgs);
                 break;
@@ -134,8 +141,6 @@ public class JPContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("The URI " + uri + " could not be found.");
         }
 
-        if (rowsDeletedCount > 0)
-            getContext().getContentResolver().notifyChange(uri, null);
         return rowsDeletedCount;
 
     }
