@@ -121,6 +121,8 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
     private final CountriesCache countriesCache;
 
+    private Loader<Cursor> countriesLoader;
+
     private GameController(Context context,
                            View rootView,
                            GameViewModel gameViewModel) {
@@ -166,7 +168,7 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
         } else {
 
-            Loader<Cursor> countriesLoader = countriesCache.fetchData();
+            countriesLoader = countriesCache.fetchData();
             countriesLoader.registerListener(0, this);
             countriesLoader.startLoading();
 
