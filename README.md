@@ -22,7 +22,7 @@ Features
 
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/num_countries_per_game_setting.png)
 
-#### Optimized for tablets.
+#### Optimized for tablets
 
 # Internals
 
