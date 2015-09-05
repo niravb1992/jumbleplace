@@ -17,6 +17,8 @@ import niravb.jumbleplace.Utilities;
 
 public class GameDataService extends IntentService {
 
+    public static final String KEY_COUNTRIES_LIST = "countriesList";
+
     public GameDataService() {
         super("GameDataService");
     }
@@ -47,9 +49,8 @@ public class GameDataService extends IntentService {
 
         int nCountries = (receiver != null) ? prefNumCountries * 2 : prefNumCountries;
 
-        String API_ENDPOINT = "https://powerful-oasis-8314.herokuapp.com/countries";
         Ion.with(getApplicationContext())
-                .load(API_ENDPOINT + "?n=" + nCountries)
+                .load(Utilities.API_ENDPOINT + "?n=" + nCountries)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -75,7 +76,7 @@ public class GameDataService extends IntentService {
                                 countriesCache.fill(countriesToCache);
 
                                 Bundle bundle = new Bundle();
-                                bundle.putStringArrayList("countriesList",
+                                bundle.putStringArrayList(KEY_COUNTRIES_LIST,
                                         new ArrayList<>(countriesForCurrentGame));
 
                                 receiver.send(0, bundle);

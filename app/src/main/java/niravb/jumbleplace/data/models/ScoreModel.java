@@ -32,8 +32,7 @@ public class ScoreModel {
     public boolean create() {
         ContentValues scoreValues = new ContentValues();
 
-        String CREATED_AT_FORMAT = "MM/dd/yyyy h:mm a";
-        SimpleDateFormat sdf = new SimpleDateFormat(CREATED_AT_FORMAT,
+        SimpleDateFormat sdf = new SimpleDateFormat(Utilities.CREATED_AT_FORMAT,
                 context.getResources().getConfiguration().locale);
         Date nowDateTime = new Date();
 

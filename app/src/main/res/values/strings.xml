@@ -39,6 +39,8 @@
 
     <string name="score_share_menu_option_text">Share</string>
     <string name="score_delete_menu_option_text">Delete</string>
+
+    <string name="score_share_chooser_title">Share Score</string>
     <string name="score_share_text">
         Scored %1$s in JumblePlace! https://github.com/niravb1992/jumbleplace
     </string>

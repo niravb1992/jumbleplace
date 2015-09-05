@@ -75,7 +75,8 @@ public class ScoresActivityFragment extends Fragment implements LoaderManager.Lo
                 Intent intent = Utilities.
                         getScoreShareIntent(getContext(),
                                 scoredOverTotalTextView.getText().toString());
-                startActivity(Intent.createChooser(intent, "Share Score"));
+                startActivity(Intent.createChooser(intent,
+                        getString(R.string.score_share_chooser_title)));
                 return true;
             default:
                 Cursor cursor = (Cursor) scoresListView.getAdapter().getItem(info.position);

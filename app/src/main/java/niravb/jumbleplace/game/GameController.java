@@ -121,8 +121,6 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
     private final CountriesCache countriesCache;
 
-    private Loader<Cursor> countriesLoader;
-
     private GameController(Context context,
                            View rootView,
                            GameViewModel gameViewModel) {
@@ -163,12 +161,12 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
         if (countriesCache.shouldReload()) {
 
-            intent.putExtra("gameDataReceiver", gameDataReceiver);
+            intent.putExtra(KEY_GAME_DATA_RECEIVER, gameDataReceiver);
             context.startService(intent);
 
         } else {
 
-            countriesLoader = countriesCache.fetchData();
+            Loader<Cursor> countriesLoader = countriesCache.fetchData();
             countriesLoader.registerListener(0, this);
             countriesLoader.startLoading();
 
@@ -245,7 +243,8 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
 
-            List<String> countriesList = resultData.getStringArrayList("countriesList");
+            List<String> countriesList = resultData.
+                    getStringArrayList(GameDataService.KEY_COUNTRIES_LIST);
 
             if (countriesList != null) {
                 initializeGameState(countriesList);

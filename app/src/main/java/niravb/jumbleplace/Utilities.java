@@ -9,6 +9,8 @@ import java.util.Random;
 public class Utilities {
 
     public static final int TABLE_ID_COLUMN_INDEX = 0;
+    public static final String CREATED_AT_FORMAT = "MM/dd/yyyy h:mm a";
+    public static final String API_ENDPOINT = "https://powerful-oasis-8314.herokuapp.com/countries";
 
     /**
      * Fisher-Yates shuffle https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
