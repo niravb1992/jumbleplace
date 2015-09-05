@@ -20,14 +20,11 @@
 
     <string name="standard_dialog_positive_button_text">Yes</string>
     <string name="standard_dialog_negative_button_text">No</string>
+    <string name="standard_dialog_ok_button_text">OK</string>
 
     <string name="finish_game_dialog_title">Game Over</string>
     <string name="finish_game_error_dialog_title">Error</string>
     <string name="clear_scores_dialog_title">Clear all Scores</string>
-
-    <string name="finish_game_dialog_positive_button_text">Yes</string>
-    <string name="finish_game_error_dialog_positive_button_text">OK</string>
-    <string name="finish_game_dialog_no_button_text">No</string>
 
     <string name="finish_game_dialog_message">
         Your current score is %1$d/%2$d. Do you want to save it?

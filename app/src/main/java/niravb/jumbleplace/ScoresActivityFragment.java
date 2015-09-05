@@ -105,7 +105,6 @@ public class ScoresActivityFragment extends Fragment implements LoaderManager.Lo
                         getActivity(),
                         getString(R.string.clear_scores_dialog_title),
                         getString(R.string.clear_scores_dialog_message),
-                        getString(R.string.standard_dialog_positive_button_text),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -114,7 +113,6 @@ public class ScoresActivityFragment extends Fragment implements LoaderManager.Lo
 
                             }
                         },
-                        getString(R.string.standard_dialog_negative_button_text),
                         null
                 );
 

@@ -1,6 +1,5 @@
 package niravb.jumbleplace.game;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +20,7 @@ import java.util.List;
 import niravb.jumbleplace.R;
 import niravb.jumbleplace.data.models.ScoreModel;
 import niravb.jumbleplace.data.sql.tables.CachedCountriesTable;
+import niravb.jumbleplace.ui.Dialogs;
 
 public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
@@ -59,57 +59,56 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
     public void finishCurrentGameAndStartNewOne() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         String dialogMessage = String.
                 format(context.getString(R.string.finish_game_dialog_message),
                         gameViewModel.score, gameViewModel.jumbledCountries.length);
 
-        builder.setMessage(dialogMessage).
-                setTitle(context.getString(R.string.finish_game_dialog_title));
-
-        builder.setPositiveButton(
-                context.getText(R.string.finish_game_dialog_positive_button_text), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ScoreModel scoreModel = new ScoreModel(context, gameViewModel.score);
-                        if (scoreModel.create()) {
-                            startNewGame();
-                        } else {
-                            dialog.cancel();
-                            AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(context);
-                            errorDialogBuilder
-                                    .setMessage(context.
-                                            getString(R.string.finish_game_dialog_error_message))
-                                    .setTitle(context.
-                                            getString(R.string.finish_game_error_dialog_title));
-
-                            errorDialogBuilder.setPositiveButton(
-                                    context.getString(R.string.
-                                            finish_game_error_dialog_positive_button_text),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            startNewGame();
-                                        }
-                                    });
-
-                            errorDialogBuilder.create().show();
-                        }
-                    }
-                });
-
-        builder.setNegativeButton(context.getString(R.string.finish_game_dialog_no_button_text),
+        Dialogs.showConfirmDialog(
+                context,
+                context.getString(R.string.finish_game_dialog_title),
+                dialogMessage,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startNewGame();
+
+                        ScoreModel scoreModel = new ScoreModel(context, gameViewModel.score);
+
+                        if (scoreModel.create()) {
+
+                            startNewGame();
+
+                        } else {
+
+                            dialog.cancel();
+
+                            Dialogs.showInfoDialog(
+                                    context,
+                                    context.getString(R.string.finish_game_error_dialog_title),
+                                    context.getString(R.string.finish_game_dialog_error_message),
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            startNewGame();
+
+                                        }
+                                    }
+                            );
+                        }
+
                     }
-                });
+                },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-        AlertDialog dialog = builder.create();
+                        startNewGame();
 
-        dialog.show();
+                    }
+                }
+        );
+
     }
     //endregion
 
