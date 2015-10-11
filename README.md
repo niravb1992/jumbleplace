@@ -9,20 +9,14 @@ Each game shows you some jumbled country names. You're supposed to guess the cou
 
 Features
 ===========
-
-#### Scores
-* Save your score at the end of the game and view all your past scores in one place
+* Save your score at the end of each game and view all your past scores in one place
 * Share your scores
+* Set how many countries you'd like to guess per game
+* Optimized for tablets
 
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/view_scores.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/share_score.png)
-
-#### Settings
-* Set how many countries you'd like to guess per game.
-
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/num_countries_per_game_setting.png)
-
-#### Optimized for tablets
 
 # Internals
 
