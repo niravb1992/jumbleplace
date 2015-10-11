@@ -5,8 +5,6 @@ JumblePlace is a simple [Android](https://www.android.com/) game to test your kn
 
 Each game shows you some jumbled country names. You're supposed to guess the country from a given jumbled country name. If your guess is correct, you are awarded a point. If you guess incorrectly or you skip to the next country, you are not given any point. 
 
-![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/game.png)
-
 Features
 ===========
 * Save your score at the end of each game and view all your past scores in one place
@@ -14,6 +12,9 @@ Features
 * Set how many countries you'd like to guess per game
 * Optimized for tablets
 
+Screenshots
+============
+![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/game.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/view_scores.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/share_score.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/num_countries_per_game_setting.png)
