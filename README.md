@@ -37,3 +37,8 @@ When the current game is over and a new game is started, the app does the follow
 * Makes an HTTP GET request to the same web service endpoint, this time requesting n country names. When those n country names are returned, the cache is emptied and new country names are stored for the next game. 
 
 The caching mechanism enables a new game to start instantly after finishing the current one. This is because the data for a new game is loaded from the local SQLite database and the fetching of the data for the next game happens in the background, without the user knowing. 
+
+## Jumbling
+
+Each country name is jumbled via the [Fisher Yates Shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+
