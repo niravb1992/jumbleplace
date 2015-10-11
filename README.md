@@ -40,5 +40,5 @@ The caching mechanism enables a new game to start instantly after finishing the 
 
 ## Jumbling
 
-Each country name is jumbled via the [Fisher Yates Shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+Each country name is jumbled via the [Fisher Yates Shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle).
 
