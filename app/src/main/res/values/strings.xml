@@ -45,5 +45,7 @@
         Scored %1$s in JumblePlace! https://github.com/niravb1992/jumbleplace
     </string>
 
+    <string name="number_over_number">%1$d/%2$d</string>
+
 
 </resources>

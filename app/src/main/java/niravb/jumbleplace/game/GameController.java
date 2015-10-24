@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import niravb.jumbleplace.R;
+import niravb.jumbleplace.Utilities;
 import niravb.jumbleplace.data.models.ScoreModel;
 import niravb.jumbleplace.data.sql.tables.CachedCountriesTable;
 import niravb.jumbleplace.ui.Dialogs;
@@ -37,7 +38,7 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
             startNewGame();
         } else {
             advanceGame();
-            updateScore(false);
+            updateScoreAndRemaining(false, false);
         }
     }
 
@@ -50,7 +51,7 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
             viewModel = new GameViewModel(savedInstanceState);
 
         } else {
-            viewModel = new GameViewModel();
+            viewModel = new GameViewModel(context);
         }
 
         return new GameController(context, rootView, viewModel);
@@ -136,6 +137,7 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
         final Button nextButton = (Button) rootView.findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                updateScoreAndRemaining(false, true);
                 advanceGame();
             }
         });
@@ -190,11 +192,20 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
     }
 
-    private void updateScore(boolean shouldUpdateScore) {
-        if (shouldUpdateScore)
-            gameViewModel.score += 1;
-        ((TextView) rootView.findViewById(R.id.current_score)).setText(
-                String.valueOf(gameViewModel.score));
+    private void updateScoreAndRemaining(boolean shouldUpdateScore, boolean shouldUpdateRemaining) {
+        if (shouldUpdateScore) {
+            gameViewModel.score++;
+        }
+
+        if (shouldUpdateRemaining && gameViewModel.numCountriesRemaining > 0)
+            gameViewModel.numCountriesRemaining--;
+
+
+        ((TextView) rootView.findViewById(R.id.current_score_and_remaining)).
+                setText(String.format(
+                        context.getString(R.string.number_over_number),
+                        gameViewModel.score,
+                        gameViewModel.numCountriesRemaining));
     }
 
     private void verifyGuess(String guess) {
@@ -205,7 +216,7 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
 
         String guessTrimmedAndLowercased = guess.trim().toLowerCase();
 
-        updateScore(guessTrimmedAndLowercased.equals(correctCountry));
+        updateScoreAndRemaining(guessTrimmedAndLowercased.equals(correctCountry), true);
 
     }
 
@@ -214,8 +225,9 @@ public class GameController implements Loader.OnLoadCompleteListener<Cursor> {
         gameViewModel.populateCountriesDataFromAPI(countries);
         gameViewModel.nextCountryIndex = 0;
         gameViewModel.score = 0;
+        gameViewModel.numCountriesRemaining = Utilities.getNumberOfCountriesPreferenceValue(context);
         advanceGame();
-        updateScore(false);
+        updateScoreAndRemaining(false, true);
         gameViewModel.gameInProgress = true;
 
     }

@@ -32,10 +32,10 @@ public class ScoresListCursorAdapter extends CursorAdapter {
         createdAtTextView.
                 setText(cursor.getString(ScoresTable.ColumnCreatedAt.COLUMN_INDEX));
         scoredOverTotalTextView.
-                setText(
-                        cursor.getInt(ScoresTable.ColumnScoredPoints.COLUMN_INDEX)
-                                + "/"
-                                + cursor.getInt(ScoresTable.ColumnTotalPoints.COLUMN_INDEX));
+                setText(String.format(
+                        context.getString(R.string.number_over_number),
+                        cursor.getInt(ScoresTable.ColumnScoredPoints.COLUMN_INDEX),
+                        cursor.getInt(ScoresTable.ColumnTotalPoints.COLUMN_INDEX)));
 
     }
 }

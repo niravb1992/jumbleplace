@@ -18,7 +18,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/current_score"
+        android:id="@+id/current_score_and_remaining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20dp" />

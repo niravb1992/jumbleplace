@@ -1,5 +1,6 @@
 package niravb.jumbleplace.game;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import java.util.HashMap;
@@ -15,12 +16,14 @@ class GameViewModel {
     public String[] jumbledCountries;
     public int nextCountryIndex;
     public int score;
+    public int numCountriesRemaining;
 
-    public GameViewModel() {
+    public GameViewModel(Context context) {
         jumbledToOriginalCountries = new HashMap<>();
         jumbledCountries = new String[]{};
         nextCountryIndex = 0;
         score = 0;
+        numCountriesRemaining = Utilities.getNumberOfCountriesPreferenceValue(context);
     }
 
     @SuppressWarnings("unchecked")
@@ -31,6 +34,7 @@ class GameViewModel {
         this.jumbledCountries = bundle.getStringArray(GameStateKeys.JUMBLED_COUNTRIES);
         this.nextCountryIndex = bundle.getInt(GameStateKeys.NEXT_COUNTRY_INDEX);
         this.score = bundle.getInt(GameStateKeys.SCORE);
+        this.numCountriesRemaining = bundle.getInt(GameStateKeys.NUM_COUNTRIES_REMAINING);
     }
 
     public Bundle populateBundleForStateSave(Bundle outState) {
@@ -39,6 +43,7 @@ class GameViewModel {
         outState.putStringArray(GameStateKeys.JUMBLED_COUNTRIES, jumbledCountries);
         outState.putInt(GameStateKeys.NEXT_COUNTRY_INDEX, nextCountryIndex - 1);
         outState.putInt(GameStateKeys.SCORE, score);
+        outState.putInt(GameStateKeys.NUM_COUNTRIES_REMAINING, numCountriesRemaining);
         return outState;
     }
 
@@ -66,6 +71,7 @@ class GameViewModel {
         public static final String JUMBLED_COUNTRIES = "jumbledCountries";
         public static final String NEXT_COUNTRY_INDEX = "nextCountryIndex";
         public static final String SCORE = "score";
+        public static final String NUM_COUNTRIES_REMAINING = "numCountriesRemaining";
     }
 
 }
