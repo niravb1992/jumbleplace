@@ -16,7 +16,6 @@ Screenshots
 ============
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/game.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/view_scores.png)
-![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/share_score.png)
 ![](https://github.com/niravb1992/jumbleplace/blob/master/screenshots/num_countries_per_game_setting.png)
 
 # Internals
