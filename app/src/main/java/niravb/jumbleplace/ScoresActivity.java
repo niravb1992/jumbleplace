@@ -2,11 +2,11 @@ package niravb.jumbleplace;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ScoresActivity extends AppCompatActivity {
+public class ScoresActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
